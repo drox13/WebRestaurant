@@ -5,13 +5,15 @@ public class Reserva {
 	private Mesa mesa;
 	private String fecha;
 	private String hora;
+	private EformaPago formaPago;
 	
 	public Reserva() {}
 
-	public Reserva(Cliente cliente, Mesa mesa, String fecha, String hora) {
+	public Reserva(Cliente cliente, Mesa mesa, String fecha, String hora, EformaPago fomaPago) {
 		this.cliente = cliente;
 		this.mesa = mesa;
 		this.fecha = fecha;
 		this.hora = hora;
+		this.formaPago = fomaPago;
 	}
 }

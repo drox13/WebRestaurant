@@ -3,13 +3,15 @@ package edu.uptc.model;
 import java.util.ArrayList;
 
 public class Sucursal {
+	private int idSucursal;
 	private String ciudad;
 	private Direccion direccion;
 	private ArrayList<Reserva> lisReservas;
 	private ArrayList<Mesa> listMesas;
 	
-	public Sucursal(String ciudad, Direccion direccion, ArrayList<Reserva> lisReservas,
+	public Sucursal(int idSucursal, String ciudad, Direccion direccion, ArrayList<Reserva> lisReservas,
 			ArrayList<Mesa> listMesas) {
+		this.idSucursal = idSucursal;
 		this.ciudad = ciudad;
 		this.direccion = direccion;
 		this.lisReservas = lisReservas;
@@ -22,6 +24,10 @@ public class Sucursal {
 	
 	public Direccion getDireccion() {
 		return direccion;
+	}
+	
+	public int getIdSucursal() {
+		return idSucursal;
 	}
 	
 	public ArrayList<Mesa> getListMesas() {

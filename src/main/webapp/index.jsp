@@ -31,23 +31,28 @@
 	<c:set var="listSucursales" value="${sManager.getListSucursales()}"/>
 
 	<form class="row g-3" action="ReservaServlet" method="post">
+	
+		<input type="number" name="cc">
 
 		<select onclick="seleccionarCiudad()" id="select" name="ciudad" class="form-select"  aria-label="Default select example">
 			<option selected>Seleccione la Sucursal</option>
 			<c:forEach items="${listSucursales}" var="i">
-				<option value="<c:out value="${i.ciudad}"/>" >
-				 	<c:out value="${i.ciudad}"/> - <c:out value="${i.direccion}"></c:out> 
+				<option value="<c:out value="${i.idSucursal}"/>" >
+				 	<c:out value="${i.idSucursal}"/> - <c:out value="${i.ciudad}"/> - <c:out value="${i.direccion}"></c:out> 
 				 </option>
-		<!-- <button onclick="${sManager.name()}">Seleccionar</button> -->
 			</c:forEach>
 		</select>
-		<div id= "mesas"></div>
 		
+		<input type="date" id="start" name="fecha"  value="2021-12-20"
+       		min="2021-12-20" max="2022-12-31">
+       		
+       	<input type="time" name="hora">
+       	
+       	<input type="number" name="n_personas" min="1" max="4" step="1">
+       	
 		<input type="submit" value="Enviar">
 	</form>
 	
-	<button onclick="seleccionarCiudad()"></button>
-	<button onclick="window.location.href='https://w3docs.com';">Click Here</button>
 	<h2 id="p">p</h2>
 	
 	<!-- Optional JavaScript; choose one of the two! -->

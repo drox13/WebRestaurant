@@ -9,12 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.cj.xdevapi.Client.ClientProperty;
+
+import edu.uptc.model.Cliente;
+import edu.uptc.model.EformaPago;
+import edu.uptc.model.Mesa;
+import edu.uptc.model.Reserva;
+import edu.uptc.model.SucursalManager;
+
 /**
  * Servlet implementation class ReservaServlet
  */
 @WebServlet("/ReservaServlet")
 public class ReservaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private SucursalManager maSucursal = new SucursalManager();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,19 +48,34 @@ public class ReservaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		String ciudad = request.getParameter("ciudad");
-		System.out.println(ciudad);
-		
 		PrintWriter out;
 	    out = response.getWriter();
         response.setContentType("text/html");
 		out.println("<html>");
-		//out.println("<head><style>\"/css/empStyle.css\"></style> <title>Respuesta adicionar empleado</title></head>");
 		out.println("<body>");
-		out.println("<h1> EMPLOYEE APP</h1>");
-		//out.println("<h2> Empleado adicionado exitosamente! </h2>");
-		//out.println("<h2> Total de empleados:"+count+" </h2>");
-		//out.println("<a href=\"index.jsp\"> Volver a la página inicial!</h2>");
+		
+		String cc = String.valueOf(request.getParameter("cc"));	
+		String idSucursal = String.valueOf(request.getParameter("ciudad"));
+		String fecha = request.getParameter("fecha");
+		String hora = request.getParameter("hora");
+		String nPersonas = String.valueOf(request.getParameter("n_personas"));	
+		System.out.println(cc + idSucursal + fecha + hora + nPersonas);
+		
+		Cliente cliente = maSucursal.buscarCliente(Integer.parseInt(cc));
+		Mesa mesa = new Mesa(2, 4);
+		
+		if(cliente != null) {
+			maSucursal.reservar(Integer.parseInt(idSucursal),new Reserva(cliente, mesa, fecha, hora, EformaPago.EFECTIVO));
+			out.println("<h1> Informacion de Reserva </h1>");
+			out.println("<h2> Reserva Exitosa </h2>");
+			out.println("<h3>"+ cc + idSucursal + fecha + hora + nPersonas +"</h3>");
+		}else {
+			
+			//out.println("<head><style>\"/css/empStyle.css\"></style> <title>Respuesta adicionar empleado</title></head>");
+			out.println("<h1> Informacion de Reserva </h1>");
+			out.println("<h2> El cliente no se encuntra registrado </h2>");
+			//out.println("<a href=\"index.jsp\"> Volver a la página inicial!</h2>");
+		}
 		out.println("</body></html>");
 	}
 
