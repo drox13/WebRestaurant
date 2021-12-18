@@ -21,8 +21,8 @@ public class DAO {
 
 	public void reservar(int id_cliente, int idSucursal, String fecha, String hora, EformaPago eformaPago) throws ClassNotFoundException, SQLException {
 		Statement stmt= null;
-		String query = "insert into reserva (id_cliente, id_sucursal, idMesa, fecha, HORA, FORMA_PAGO) "
-				+ "values('"+id_cliente+"','"+idSucursal+"','"+fecha+"','"+hora + "','"+ eformaPago.toString() +");";
+		String query = "insert into reserva (id_cliente, id_sucursal, fecha, HORA, FORMA_PAGO)"
+				+ "values('"+id_cliente+"','"+idSucursal+"','"+fecha+"','"+hora + "','"+ eformaPago.toString() +"');";
 		try{
 			Class.forName("com.mysql.cj.jdbc.Driver");  
 			Connection con = DriverManager.getConnection("jdbc:mysql://"+this.maquina+":"+this.puerto+"/"+db,this.usuario,this.clave);
@@ -61,19 +61,33 @@ public class DAO {
 		ArrayList<Sucursal> sucursalList = new ArrayList<Sucursal>();
 
 		Statement stmt= null;
-		String query = "select * from SUCURSAL s, DIRECCION d"
-				+ "	where s.id_direccion = d.id_direccion;";
+		String query = "select * from SUCURSAL s, DIRECCION d where s.id_direccion = d.id_direccion;";
 		
 		//String query = "select * from empleado;";
 		Class.forName("com.mysql.cj.jdbc.Driver");  
-		Connection con = DriverManager.getConnection("jdbc:mysql://"+this.maquina+":"+this.puerto+"/"+db,this.usuario,this.clave);
+		Connection con = DriverManager.getConnection("jdbc:mysql://"+this.maquina+":"+this.puerto+"/empleado",this.usuario,this.clave);
 		stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery(query);
 		while(rs.next()) {
-			//System.out.println(rs.getInt("emp_id"));
+			System.out.println("asda");
 			sucursalList.add(new Sucursal(rs.getInt("id_sucursal"), rs.getString("nombre"), new Direccion(rs.getInt("calle"), rs.getInt("carrera"))));
 		}
 		con.close();
+		verEmpleados();
 		return sucursalList;
 	}
+	
+	public void verEmpleados() throws ClassNotFoundException, SQLException {
+    	Statement stmt = null;
+    	String query = "select * from empleado";
+	    Class.forName("com.mysql.cj.jdbc.Driver");
+	    Connection con = DriverManager.getConnection("jdbc:mysql://"+this.maquina+":"+this.puerto+"/empleado",this.usuario,this.clave);
+	    stmt = con.createStatement();
+	    ResultSet rs = stmt.executeQuery(query);
+	    
+	    while (rs.next()) {
+	    	System.out.println(rs.getInt("emp_id"));
+	    }
+	    con.close();
+    }
 }
