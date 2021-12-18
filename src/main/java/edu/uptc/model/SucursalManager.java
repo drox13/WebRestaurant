@@ -35,9 +35,9 @@ public class SucursalManager {
 		return listSucursales;
 	}
 	
-	public void reservar(int id_cliente, int idSucursal, String fecha, String hora, EformaPago fomaPago) {
+	public void reservar(int id_cliente, int idSucursal, String fecha, String hora, EformaPago fomaPago, int nPersonas) {
 		try {
-			dao.reservar(id_cliente, idSucursal, fecha, hora, fomaPago);
+			dao.reservar(id_cliente, idSucursal, fecha, hora, fomaPago, nPersonas);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

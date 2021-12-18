@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -45,10 +46,31 @@
 		
 		<input type="date" id="start" name="fecha"  value="2021-12-20"
        		min="2021-12-20" max="2022-12-31">
-       		
-       	<input type="time" name="hora">
        	
-       	<input type="number" name="n_personas" min="1" max="4" step="1">
+       	<select name="hora" class="form-select"  aria-label="Default select example">
+       		<option selected>Seleccione la Hora de reserva</option>
+       		<c:forEach var = "i" begin = "12" end = "15">
+       			<option value="<c:out value="${i} : 00"/>" >
+       				 <c:out value="${i}: 00"/>
+       			</option>
+     		 </c:forEach>
+     		 
+     		 <c:forEach var = "i" begin = "6" end = "10">
+       			<option value="<c:out value="${i} : 00 PM"/>" >
+       				 <c:out value="${i}: 00 PM"/>
+       			</option>
+     		 </c:forEach>
+       	</select>
+       	
+       </*%
+       	for (int i = 0; i < 15; i++) {
+       		out.print("<p>" + i + "</p>");
+       	}
+       	%*/>
+       	       	   	
+       	<!--  <input type="time" name="hora"> -->
+       	
+       	<input type="number" name="n_personas" min="1" step="1">
        	
 		<input type="submit" value="Enviar">
 	</form>
