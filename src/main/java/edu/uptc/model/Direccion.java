@@ -1,16 +1,16 @@
 package edu.uptc.model;
 
 public class Direccion {
-	private String calle;
-	private String carrera;
+	private int calle;
+	private int carrera;
 	
-	public Direccion(String calle, String carrera) {
+	public Direccion(int calle, int carrera) {
 		this.calle = calle;
 		this.carrera = carrera;
 	}
 	
 	@Override
 	public String toString() {
-		return "calle: " + calle  + " carreara: " + carrera;
+		return "calle: " + calle  + " carrera: " + carrera;
 	}
 }

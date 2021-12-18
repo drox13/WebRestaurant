@@ -9,8 +9,7 @@ public class Sucursal {
 	private ArrayList<Reserva> lisReservas;
 	private ArrayList<Mesa> listMesas;
 	
-	public Sucursal(int idSucursal, String ciudad, Direccion direccion, ArrayList<Reserva> lisReservas,
-			ArrayList<Mesa> listMesas) {
+	public Sucursal(int idSucursal, String ciudad, Direccion direccion) {
 		this.idSucursal = idSucursal;
 		this.ciudad = ciudad;
 		this.direccion = direccion;

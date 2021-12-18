@@ -62,10 +62,10 @@ public class ReservaServlet extends HttpServlet {
 		System.out.println(cc + idSucursal + fecha + hora + nPersonas);
 		
 		Cliente cliente = maSucursal.buscarCliente(Integer.parseInt(cc));
-		Mesa mesa = new Mesa(2, 4);
 		
 		if(cliente != null) {
-			maSucursal.reservar(Integer.parseInt(idSucursal),new Reserva(cliente, mesa, fecha, hora, EformaPago.EFECTIVO));
+			//id_cliente, idSucursal, id_Mesa, String fecha, String hora, EformaPago eformaPago
+			maSucursal.reservar(cliente.getCc(), Integer.parseInt(idSucursal), fecha, hora, EformaPago.EFECTIVO );
 			out.println("<h1> Informacion de Reserva </h1>");
 			out.println("<h2> Reserva Exitosa </h2>");
 			out.println("<h3>"+ cc + idSucursal + fecha + hora + nPersonas +"</h3>");
@@ -78,5 +78,4 @@ public class ReservaServlet extends HttpServlet {
 		}
 		out.println("</body></html>");
 	}
-
 }
